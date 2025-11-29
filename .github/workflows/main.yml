@@ -25,12 +25,11 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          mvn clean verify sonar:sonar \
-          -DskipTests \
-          -Dsonar.projectKey=myproject \
-          -Dsonar.host.url=${{ secrets.SONAR_URL }} \
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-          -Dsonar.scanner.metadataFile=target/site/sonar/report-task.txt
+          mvn -Dmaven.test.failure.ignore=true clean verify sonar:sonar \
+            -Dsonar.projectKey=myproject \
+            -Dsonar.host.url=${{ secrets.SONAR_URL }} \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+            -Dsonar.scanner.metadataFile=target/site/sonar/report-task.txt
 
 
       # qulity gate
@@ -41,8 +40,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           scanMetadataReportFile: target/site/sonar/report-task.txt
-
-
 
       # 5️⃣ Build final JAR
       - name: Build JAR
