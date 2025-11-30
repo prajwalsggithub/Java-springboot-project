@@ -83,9 +83,9 @@ jobs:
             sudo chown ec2-user:ec2-user /var/log/app
             sudo chmod 777 /var/log/app
 
-            cd /home/ec2-user/app
+            cd /home/ec2-user/app/target
 
-            nohup java -jar datastore-0.0.7.jar \
+            sudo nohup java -jar datastore-0.0.7.jar \
               --MYSQL_HOST="jdbc:mysql://database-1.c7y2sigiw2m6.us-east-1.rds.amazonaws.com:3306/datastore?createDatabaseIfNotExist=true" \
               --MYSQL_USERNAME="admin" \
               --MYSQL_PASSWORD="Cloud123" \
